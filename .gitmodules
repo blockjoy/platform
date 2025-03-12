@@ -1,0 +1,9 @@
+[submodule "blockvisor"]
+	path = blockvisor
+	url = git@github.com:blockjoy/blockvisor.git
+[submodule "blockvisor-api"]
+	path = blockvisor-api
+	url = git@github.com:blockjoy/blockvisor-api.git
+[submodule "blockvisor-protocols"]
+	path = blockvisor-protocols
+	url = git@github.com:blockjoy/blockvisor-protocols.git
