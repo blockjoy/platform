@@ -223,6 +223,44 @@ bv n job briefly-clean-gator stop grafana   # Stop the Grafana service
 bv n job briefly-clean-gator start grafana  # Start the Grafana service
 ```
 
+### Accessing Node Shell
+
+You can access a shell inside a node's container environment for debugging and inspection:
+
+```bash
+bv n shell <node-name>
+```
+
+This opens an Apptainer shell within the node's container, giving you access to the node's processes and filesystem. 
+
+Example:
+```bash
+bv n shell test-node-beta
+Apptainer> ps xauww
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.0  0.0 1100020 16776 ?       Sl   Mar04   0:00 appinit
+root          65  0.0  0.0  87784  6144 ?        Ssl  Mar04   0:00 /usr/bin/babel_job_runner grafana
+root          67  0.0  0.0  88672  6996 ?        Ssl  Mar04   0:00 /usr/bin/babel_job_runner caddy
+root          68  0.0  0.0  87932  6364 ?        Ssl  Mar04   0:38 /usr/bin/babel_job_runner alloy
+root         215  0.0  0.0   2576   896 ?        S    Mar04   0:00 sh -c /usr/bin/caddy run --config /etc/caddy/Caddyfile
+root         216  0.0  0.0 1271072 49196 ?       Sl   Mar04   2:00 /usr/bin/caddy run --config /etc/caddy/Caddyfile
+root         226  0.0  0.0   2576   944 ?        S    Mar04   0:00 sh -c /usr/bin/alloy run --server.http.listen-addr=127.0.0.1:12346 --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
+root         227  0.0  0.0   2576   896 ?        S    Mar04   0:00 sh -c GF_USERS_DEFAULT_ROLE=Viewer GF_AUTH_ANONYMOUS_ENABLED=true GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer GF_ROLE_VIEWER_EDITORS_CAN_SAVE=false grafana-server --homepath /usr/share/grafana --config /etc/grafana/grafana.ini
+root         228  0.9  0.1 6704452 229448 ?      Sl   Mar04 119:36 /usr/bin/alloy run --server.http.listen-addr=127.0.0.1:12346 --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
+root         229  0.0  0.0   3924  3068 ?        S    Mar04   0:00 bash /usr/sbin/grafana-server --homepath /usr/share/grafana --config /etc/grafana/grafana.ini
+root         232  0.5  0.1 1841888 210564 ?      Sl   Mar04  77:41 /usr/share/grafana/bin/grafana server --homepath /usr/share/grafana --config /etc/grafana/grafana.ini
+root         260  0.0  0.0  87792  7332 ?        Ssl  Mar04   0:16 /usr/bin/babel_job_runner op-node
+root         261  0.0  0.0  87652  7416 ?        Ssl  Mar04   0:00 /usr/bin/babel_job_runner op-reth
+root      272269  0.0  0.0  92252 10052 ?        Sl   08:25   0:00 /usr/bin/babel /var/lib/blockvisor/nodes/test-node-2/rootfs
+root      272558  0.0  0.0   2576   952 ?        S    08:37   0:00 sh -c /root/bin/op-node --network=op-mainnet --rpc.addr=0.0.0.0 --rpc.port=7000 --l1=https://eth-l1.example.com --l1.beacon=https://lighthouse.example.com --l1.trustrpc --l1.rpckind=standard --l2=http://127.0.0.1:8551 --l2.jwt-secret=/blockjoy/protocol_data/optimism/jwt.txt --syncmode=execution-layer
+root      272559  0.0  0.0 1279052 47728 ?       Sl   08:37   0:00 /root/bin/op-node --network=op-mainnet --rpc.addr=0.0.0.0 --rpc.port=7000 --l1=https://eth-l1.example.com --l1.beacon=https://lighthouse.example.com --l1.trustrpc --l1.rpckind=standard --l2=http://127.0.0.1:8551 --l2.jwt-secret=/blockjoy/protocol_data/optimism/jwt.txt --syncmode=execution-layer
+root      272593  0.0  0.0   4188  3364 ?        S    08:37   0:00 /bin/bash --norc
+root      272599  0.0  0.0   8088  3980 ?        R+   08:38   0:00 ps xauww
+Apptainer> 
+```
+
+The shell provides full access to the container environment, showing all running jobs and their processes. This is particularly useful for advanced debugging and troubleshooting.
+
 ### Container Management with Apptainer
 
 BlockVisor uses Apptainer to run lightweight containers for each node. You can interact with these containers directly using Apptainer commands.
