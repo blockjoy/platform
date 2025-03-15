@@ -41,6 +41,52 @@ User interface for interacting with the API that provides:
 
 ## Deployment
 
+### Quick Start Guide
+#### Requirements
+- docker
+- docker compose
+- git
+
+### Quick Start Deployment
+1. Checkout the docs repo
+> include all the submodules too
+```bash
+$ git clone --recursive-submodules https://github.com/blockjoy/blockvisor-docs.git
+$ cd blockvisor-docs
+```
+2. Start the main stack 
+> start and build all components
+```bash
+$ docker compose up --build -d
+```
+
+3. Initialize the database with Roles, Users and a dev Region
+> This will create an initial admin user and non-admin user with the password you define
+```bash
+$ docker compose run init
+[+] Creating 2/2
+ ✔ Container blockvisor-docs-database-1  Running                                                                                                                                                                                                                                                                               0.0s
+ ✔ Container blockvisor-docs-api-1       Running                                                                                                                                                                                                                                                                               0.0s
+[+] Running 1/1
+ ✔ Container blockvisor-docs-database-1  Healthy                                                                                                                                                                                                                                                                               0.5s
+
+Enter your email: demo@example.com
+Enter your first name: demo
+Enter your last name: admin
+Enter your password:
+
+***Initial User Set is Complete***
+
+----------Credentials----------
+Admin User: 		demo@example.com
+Non-Admin User: 	user@example.com
+Both user passwords are set to what you defined.
+The Blockvisor stack setup is complete.  You can now access it at http://<server_ip>
+```
+
+4. Stack setup is now complete.  Should now be able to login to the UI with the credentials you provided at the IP of your server or localhost.
+![Login Page](./images/login.png "Login Page")
+
 ### Blockvisor API
 
 *Documentation coming soon*
