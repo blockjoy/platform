@@ -48,6 +48,8 @@ User interface for interacting with the API that provides:
 - git
 
 ### Quick Start Deployment
+The following steps will deploy the Blockvisor stack in to a development ready environment.
+
 1. Checkout the docs repo
 > include all the submodules too
 ```bash
@@ -90,34 +92,38 @@ The Blockvisor stack setup is complete.  You can now access it at http://<server
 
 ![Login Page](./images/login.png "Login Page")
 
-### Blockvisor API
+What have we installed?  This has deployed all the required services to run the blockvisor stack.  Including: blockvisor-api, blockvisor-web, a single blockvisor host, a postgres database, a local mqtt broker (emqx), the necessary proxies for the services, as well as an observability stack (prometheus, opentelemetry, loki, tempo, and grafana).
 
-*Documentation coming soon*
-
-### Blockvisor
-
-Detailed documentation is available in the [blockvisor](blockvisor/README.md) directory.
-
-#### High-Level Deployment Steps
-- Download required bvup  and procure a token
-- Install dependencies
-- Install Apptainer
-- Configure network
-- Run bvup
-
-## Blockvisor Protocol
-
-Detailed documentation is available in the [blockvisor-protocols](blockvisor-protocols/README.md) directory.
-
-### High-Level Development Steps
-- Define protocol metadata in `babel.yaml`
-- Define protocol clients
-- Define protocol variants
-- Publish protocol info to API
-- Build and push protocol image to the registry
-- Publish image to Blockvisor API
+Some helpful links:
+- UI: http://<server_ip>
+- Grafana: http://<server_ip/grafana (admin/admin)
+- EMQX UI: http://<server_ip>:18083 (admin/public)
 
 
-## Blockvisor Frontend
+:rotating_light: If you want to redeploy the blockvisor stack, you will need take the following steps :rotating_light:
+1. Bring the stack down
+```bash
+docker compose down
+```
+2. Cleanup temp files
+```bash
+rm setup/success
+```
+3. Now you can redeploy a fresh stack.
 
-*Documentation coming soon*
+### Next Steps
+
+Great, so now you have the Blockvisor stack up and running and ready for testing and development.  The next items to consider:
+1. Setup your local machine for development: [Link](./docs/blockvisor/bv_dev.md)
+2. Building your own node image: [Link](https://github.com/blockjoy/blockvisor-protocols/blob/main/docs/HOWTO.md)
+3. Publishing your protocol image to your API: [Link](https://github.com/blockjoy/blockvisor-protocols/blob/main/docs/HOWTO.md#testing-and-deploying-protocols)
+4. Adding additional blockvisor hosts: [Link](https://github.com/blockjoy/bv-host-setup)
+
+### Deep Dive
+
+If you want to deep dive in to the code, how things work, or want more details you can checkout the documentation and code in each of the following repos:
+
+- Blockvisor API: [Link](https://github.com/blockjoy/blockvisor-api)
+- Blockvisor Web App: [Link](https://github.com/blockjoy/blockvisor-app-web)
+- Blockvisor Daemon: [Link](https://github.com/blockjoy/blockvisor)
+- Blockvisor Protocols: [Link](https://github.com/blockjoy/blockvisor-protocols)
