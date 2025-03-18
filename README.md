@@ -85,6 +85,7 @@ The Blockvisor stack setup is complete.  You can now access it at http://<server
 ```
 
 4. Stack setup is now complete.  Should now be able to login to the UI with the credentials you provided at the IP of your server or localhost.
+
 ![Login Page](./images/login.png "Login Page")
 
 ### Blockvisor API
