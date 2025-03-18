@@ -9,7 +9,7 @@ The Blockvisor stack enables simple configuration, management, and replication o
 - **Flexible deployment** options including private data centers and bare metal servers
 
 ## Architecture
-![BV Architecture](./blockvisor/overview.jpg)
+![BV Architecture](https://github.com/blockjoy/blockvisor/blob/7cca38317c4b849b0634a0d42b843457c568036f/overview.jpg)
 
 The stack consists of four main components:
 
