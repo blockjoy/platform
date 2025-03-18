@@ -37,7 +37,7 @@ http:// {
 	route /mqtt* {
 		reverse_proxy http://emqx:1883
 	}
-	reverse_proxy app-web:3000 {
+	reverse_proxy http://web:3000 {
 		header_up Host localhost
 	}
 }

@@ -51,19 +51,21 @@ User interface for interacting with the API that provides:
 1. Checkout the docs repo
 > include all the submodules too
 ```bash
-$ git clone --recursive-submodules https://github.com/blockjoy/blockvisor-docs.git
-$ cd blockvisor-docs
+git clone --recurse-submodules https://github.com/blockjoy/blockvisor-docs.git
+cd blockvisor-docs
 ```
 2. Start the main stack 
 > start and build all components
 ```bash
-$ docker compose up --build -d
+docker compose up --build -d
 ```
 
 3. Initialize the database with Roles, Users and a dev Region
 > This will create an initial admin user and non-admin user with the password you define
 ```bash
-$ docker compose run init
+docker compose run init
+```
+```bash
 [+] Creating 2/2
  ✔ Container blockvisor-docs-database-1  Running                                                                                                                                                                                                                                                                               0.0s
  ✔ Container blockvisor-docs-api-1       Running                                                                                                                                                                                                                                                                               0.0s

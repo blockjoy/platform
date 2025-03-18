@@ -85,10 +85,10 @@ services:
       - 8090:8090
       - 9901:9901
 
-  app-web:
-    image: app-web:latest
+  web:
+    image: web:latest
     build:
-      context: ./blockvisor-app-web/
+      context: ./blockvisor-web/
       args:
         NODE_ENV: production
         NEXT_PUBLIC_API_URL: "/api"
