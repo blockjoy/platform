@@ -115,7 +115,7 @@ rm setup/success
 ### Next Steps
 
 Great, so now you have the Blockvisor stack up and running and ready for testing and development.  The next items to consider:
-1. Setup your local machine for development: [Link](./docs/blockvisor/bv_dev.md)
+1. Setup your local machine for bv development: [Link](./docs/blockvisor/bv_dev.md)
 2. Building your own node image: [Link](https://github.com/blockjoy/blockvisor-protocols/blob/main/docs/HOWTO.md)
 3. Publishing your protocol image to your API: [Link](https://github.com/blockjoy/blockvisor-protocols/blob/main/docs/HOWTO.md#testing-and-deploying-protocols)
 4. Adding additional blockvisor hosts: [Link](https://github.com/blockjoy/bv-host-setup)
