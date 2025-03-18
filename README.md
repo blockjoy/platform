@@ -9,6 +9,7 @@ The Blockvisor stack enables simple configuration, management, and replication o
 - **Flexible deployment** options including private data centers and bare metal servers
 
 ## Architecture
+![BV Architecture](./blockvisor/overview.jpg)
 
 The stack consists of four main components:
 
@@ -121,7 +122,7 @@ Great, so now you have the Blockvisor stack up and running and ready for testing
 
 ### Deep Dive
 
-If you want to deep dive in to the code, how things work, or want more details you can checkout the documentation and code in each of the following repos:
+If you want to deep dive in to the code, how things work, or want more details you can checkout the documentation and code in each of the following repos for the four main components:
 
 - Blockvisor API: [Link](https://github.com/blockjoy/blockvisor-api)
 - Blockvisor Web App: [Link](https://github.com/blockjoy/blockvisor-app-web)
