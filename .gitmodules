@@ -1,12 +1,12 @@
 [submodule "blockvisor"]
 	path = blockvisor
 	url = https://github.com/blockjoy/blockvisor.git
-[submodule "blockvisor-api"]
-	path = blockvisor-api
-	url = https://github.com/blockjoy/blockvisor-api.git
-[submodule "blockvisor-protocols"]
-	path = blockvisor-protocols
-	url = https://github.com/blockjoy/blockvisor-protocols.git
-[submodule "blockvisor-web"]
-	path = blockvisor-web
-	url = https://github.com/blockjoy/blockvisor-app-web.git
+[submodule "api"]
+	path = api
+	url = https://github.com/blockjoy/api.git
+[submodule "protocols"]
+	path = protocols
+	url = https://github.com/blockjoy/protocols.git
+[submodule "web"]
+	path = web
+	url = https://github.com/blockjoy/web.git
