@@ -8,9 +8,9 @@ down:
 	docker compose down
 
 test-images:
-	docker rmi test_v1
+	docker rmi test_v1 || true
 	docker build -t test_v1 blockvisor/bv/tests/image_v1
-	docker rmi test_v2
+	docker rmi test_v2 || true
 	docker build -t test_v2 blockvisor/bv/tests/image_v2
 
 host-setup:
