@@ -25,7 +25,7 @@ services:
   api:
     image: api:latest
     build:
-      context: ./blockvisor-api/
+      context: ./api/
       dockerfile: ./docker/Dockerfile
     pull_policy: never
     ports:
@@ -47,12 +47,12 @@ services:
       REFRESH_SECRET: 23942390
       UI_BASE_URL: http://0.0.0.0
       # cookbook service
-      AWS_ACCESS_KEY_ID: s3-compatible-access-key-id
-      AWS_SECRET_ACCESS_KEY: se-compatible-secret-key
+      AWS_ACCESS_KEY_ID: ${S3_COMPATIBLE_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${S3_COMPATIBLE_SECRET_KEY}
       AWS_REGION: us-west-000
-      STORAGE_URL: https://s3-compatible-storage.com
-      BUNDLE_BUCKET: bundle
-      ARCHIVE_BUCKET: archvies
+      STORAGE_URL: ${S3_COMPATIBLE_STORAGE_URL}
+      BUNDLE_BUCKET: ${BUNDLE_BUCKET_NAME}
+      ARCHIVE_BUCKET: ${ARCHIVES_BUCKET_NAME}
       DIR_CHAINS_PREFIX: chains
       PRESIGNED_URL_EXPIRATION: 8h
       # mqtt
@@ -62,10 +62,10 @@ services:
       MQTT_PASSWORD: public
       # cloudflare
       CF_BASE_URL: https://api.cloudflare.com/client/v4
-      CF_ZONE: cf_zone_id_goes_here
+      CF_ZONE: ${CF_ZONE}
       CF_DNS_BASE: example.com
       CF_TTL: 300
-      CF_TOKEN: cf_dns_edit_token-goes-here
+      CF_TOKEN: ${CF_TOKEN}
       CLOUDFLARE_CERT_KEY: sneaky-fake-cert
       LOG_ENVIRONMENT: production
       OPENTELEMETRY_ENDPOINT: http://opentelemetry:4317
@@ -80,7 +80,7 @@ services:
   envoy:
     image: envoyproxy/envoy:v1.24-latest
     volumes:
-      - ./blockvisor/envoy.yaml:/etc/envoy/envoy.yaml
+      - ./setup/envoy.yaml:/etc/envoy/envoy.yaml
     ports:
       - 8090:8090
       - 9901:9901
@@ -88,7 +88,7 @@ services:
   web:
     image: web:latest
     build:
-      context: ./blockvisor-web/
+      context: ./web/
       args:
         NODE_ENV: production
         NEXT_PUBLIC_API_URL: "/api"
@@ -96,7 +96,7 @@ services:
         NEXT_PUBLIC_VERCEL_ENV: "production"
         NEXT_PUBLIC_LOADING_DURATION: "200"
 
-        NEXT_PUBLIC_STRIPE_KEY : "pk_test_stripepublickeygoeshere"
+        NEXT_PUBLIC_STRIPE_KEY: "pk_test_stripepublickeygoeshere"
 
     pull_policy: never
     ports:
@@ -110,8 +110,11 @@ services:
     depends_on:
       - database
       - api
-    volumes:
-      - ./setup:/data
+    environment:
+      FIRST_NAME: ${API_USER_FIRST_NAME}
+      LAST_NAME: ${API_USER_LAST_NAME}
+      EMAIL: ${API_USER_EMAIL}
+      PASSWORD: ${API_USER_PASSWORD}
     stdin_open: true
     tty: true
 
@@ -123,28 +126,16 @@ services:
     ports:
       - 80:80
 
-  blockvisor:
-    image: blockvisor:latest
-    build:
-      context: ./setup/blockvisor
-    pull_policy: never
-    depends_on:
-      - database
-      - api
-      - init
-    volumes:
-      - ./setup:/data
-
   grafana:
     image: grafana/grafana:11.3.1
     ports:
       - 23000:3000
-    environment: 
+    environment:
       GF_SERVER_ROOT_URL: "http://grafana/grafana"
       GF_SERVER_SERVE_FROM_SUB_PATH: true
       GF_LIVE_ALLOWED_ORIGINS: "*"
     volumes:
-      - ./blockvisor/docker/grafana.yaml:/etc/grafana/provisioning/datasources/prometheus.yaml
+      - ./setup/grafana.yaml:/etc/grafana/provisioning/datasources/prometheus.yaml
     depends_on:
       - prometheus
 
@@ -153,7 +144,7 @@ services:
     ports:
       - 29090:9090
     volumes:
-      - ./blockvisor/docker/prometheus.yaml:/etc/prometheus/prometheus.yml
+      - ./setup/prometheus.yaml:/etc/prometheus/prometheus.yml
     depends_on:
       - opentelemetry
 
@@ -164,7 +155,7 @@ services:
       - 24317:4317
       - 28889:8889
     volumes:
-      - ./blockvisor/docker/opentelemetry.yaml:/etc/opentelemetry.yaml
+      - ./setup/opentelemetry.yaml:/etc/opentelemetry.yaml
     depends_on:
       - loki
       - tempo
@@ -180,4 +171,4 @@ services:
       - 23200:3200
     command: -config.file=/etc/tempo/tempo.yaml
     volumes:
-      - ./blockvisor/docker/tempo.yaml:/etc/tempo/tempo.yaml
+      - ./setup/tempo.yaml:/etc/tempo/tempo.yaml

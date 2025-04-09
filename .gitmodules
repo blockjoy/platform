@@ -1,12 +1,12 @@
 [submodule "blockvisor"]
 	path = blockvisor
-	url = https://github.com/blockjoy/blockvisor.git
+	url = git@github.com:blockjoy/blockvisor.git
 [submodule "api"]
 	path = api
-	url = https://github.com/blockjoy/api.git
+	url = git@github.com:blockjoy/api.git
 [submodule "protocols"]
 	path = protocols
-	url = https://github.com/blockjoy/protocols.git
+	url = git@github.com:blockjoy/protocols.git
 [submodule "web"]
 	path = web
-	url = https://github.com/blockjoy/web.git
+	url = git@github.com:blockjoy/web.git

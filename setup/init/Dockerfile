@@ -7,10 +7,10 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # Copy scripts
+COPY test_roles_permissions.query .
 COPY database-setup.py .
-COPY init.sh .
 
 # Make sure the entrypoint script is executable
-RUN chmod +x init.sh
+RUN chmod +x database-setup.py
 
-ENTRYPOINT ["./init.sh"]
+CMD ["sleep", "initinity"]
