@@ -63,7 +63,7 @@ services:
       # cloudflare
       CF_BASE_URL: https://api.cloudflare.com/client/v4
       CF_ZONE: ${CF_ZONE}
-      CF_DNS_BASE: example.com
+      CF_DNS_BASE: blockvisor.dev
       CF_TTL: 300
       CF_TOKEN: ${CF_TOKEN}
       CLOUDFLARE_CERT_KEY: sneaky-fake-cert
